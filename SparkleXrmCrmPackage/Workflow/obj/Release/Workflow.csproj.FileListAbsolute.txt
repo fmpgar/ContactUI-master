@@ -1,0 +1,11 @@
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\bin\Release\SparkleXrm.Workflow.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\bin\Release\SparkleXrm.Workflow.pdb
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\bin\Release\Microsoft.Crm.Sdk.Proxy.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\bin\Release\Microsoft.IdentityModel.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\bin\Release\Microsoft.Xrm.Sdk.Workflow.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\bin\Release\Microsoft.Crm.Sdk.Proxy.xml
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\bin\Release\Microsoft.Xrm.Sdk.Workflow.xml
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\obj\Release\SparkleXrm.Workflow.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\obj\Release\SparkleXrm.Workflow.pdb
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\bin\Release\Microsoft.Xrm.Sdk.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Workflow\bin\Release\Microsoft.Xrm.Sdk.xml

@@ -1,0 +1,9 @@
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Plugins\bin\Release\SparkleXrm.Plugins.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Plugins\bin\Release\SparkleXrm.Plugins.pdb
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Plugins\bin\Release\Microsoft.Crm.Sdk.Proxy.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Plugins\bin\Release\Microsoft.IdentityModel.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Plugins\bin\Release\Microsoft.Xrm.Sdk.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Plugins\bin\Release\Microsoft.Crm.Sdk.Proxy.xml
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Plugins\bin\Release\Microsoft.Xrm.Sdk.xml
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Plugins\obj\Release\SparkleXrm.Plugins.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\Plugins\obj\Release\SparkleXrm.Plugins.pdb

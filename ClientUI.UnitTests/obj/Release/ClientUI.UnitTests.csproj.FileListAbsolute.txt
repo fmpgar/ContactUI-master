@@ -1,0 +1,36 @@
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\ClientUI.UnitTests.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\ClientHooks.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\mscorlib.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\Script.jQuery.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\Script.jQuery.UI.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\Script.Knockout.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\Script.Web.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\Slick.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\SparkleXrm.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\SparkleXrmUI.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\ClientHooks.pdb
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\Script.jQuery.xml
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\Script.jQuery.UI.xml
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\Script.Knockout.xml
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\Script.Web.xml
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\bin\mscorlib.xml
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\obj\Release\ClientUI.UnitTests.csprojResolveAssemblyReference.cache
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI.UnitTests\obj\Release\ClientUI.UnitTests.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\ClientUI.UnitTests.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\ClientHooks.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\mscorlib.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\Script.jQuery.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\Script.jQuery.UI.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\Script.Knockout.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\Script.Web.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\Slick.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\SparkleXrm.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\SparkleXrmUI.dll
+C:\ContactUI-master\ClientUI.UnitTests\bin\ClientHooks.pdb
+C:\ContactUI-master\ClientUI.UnitTests\bin\Script.jQuery.xml
+C:\ContactUI-master\ClientUI.UnitTests\bin\Script.jQuery.UI.xml
+C:\ContactUI-master\ClientUI.UnitTests\bin\Script.Knockout.xml
+C:\ContactUI-master\ClientUI.UnitTests\bin\Script.Web.xml
+C:\ContactUI-master\ClientUI.UnitTests\bin\mscorlib.xml
+C:\ContactUI-master\ClientUI.UnitTests\obj\Release\ClientUI.UnitTests.csprojResolveAssemblyReference.cache
+C:\ContactUI-master\ClientUI.UnitTests\obj\Release\ClientUI.UnitTests.dll

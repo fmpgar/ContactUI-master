@@ -1,0 +1,11 @@
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\CrmPackage\bin\Release\SparkleXrm.Plugins.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\CrmPackage\bin\Release\SparkleXrm.Workflow.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\CrmPackage\bin\Release\Microsoft.Xrm.Sdk.dll
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\CrmPackage\bin\Release\SparkleXrm.Plugins.pdb
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\CrmPackage\bin\Release\SparkleXrm.Workflow.pdb
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\CrmPackage\bin\Release\Microsoft.Xrm.Sdk.xml
+D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\CrmPackage\obj\Release\CrmPackage.csprojResolveAssemblyReference.cache
+C:\ContactUI-master\SparkleXrmCrmPackage\CrmPackage\bin\Release\SparkleXrmCrmPackage.CrmPackage.dll
+C:\ContactUI-master\SparkleXrmCrmPackage\CrmPackage\bin\Release\SparkleXrmCrmPackage.CrmPackage.pdb
+C:\ContactUI-master\SparkleXrmCrmPackage\CrmPackage\obj\Release\SparkleXrmCrmPackage.CrmPackage.dll
+C:\ContactUI-master\SparkleXrmCrmPackage\CrmPackage\obj\Release\SparkleXrmCrmPackage.CrmPackage.pdb
