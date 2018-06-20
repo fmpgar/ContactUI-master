@@ -23,6 +23,7 @@
         }
         #contactsEditorGrid {
             margin-top: 30px;
+            padding-top: 10px;
         }
         .gridtoolbar-button.addnew16 {
             font-size: 12px !important;
@@ -116,7 +117,7 @@
     <div style="display: none" data-bind='validationOptions: { messageTemplate: "xrmControlValidationMessage" }, fadeVisible: ContactEdit().AddNewVisible'>
         <div data-bind='with: ContactEdit'>
             <div data-bind="template: { name: 'sparkle-form-tab-header', data: { title: 'Contact' } }"></div>
-            <table class="sparkle-FormSection" columns="2" label="General" style="table-layout: fixed;" height="1%" valign="top" cellspacing="0" cellpadding="3">
+            <table class="sparkle-FormSection" columns="2" label="General" style="table-layout: fixed;"  valign="top" cellspacing="0" cellpadding="3">
                 <colgroup>
                     <col width="130">
                     <col>
@@ -124,19 +125,8 @@
                     <col>
                 </colgroup>
                 <tbody>
-                    <tr valign="top">
-                        <!--ko template: {
-                            name: 'sparkle-form-field', 
-                            data: { 
-                                label: ResourceStrings.FirstName,
-                                field:firstname,
-                                required:0,
-                                type:'text',
-                                disable:false,
-                                visible:true } }-->
-                        <!--/ko-->
-                    </tr>
-                    <tr valign="top">
+
+                    <tr valign="top" style="height:auto">
                         <!--ko template: {
                             name: 'sparkle-form-field', 
                             data: { 

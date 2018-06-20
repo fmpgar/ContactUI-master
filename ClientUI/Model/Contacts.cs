@@ -25,7 +25,9 @@ namespace ClientUI.Model
         [ScriptName("creditlimit")]
         public Money CreditLimit;
         [ScriptName("firstname")]
-        public string FirstName;
+        public string firstname;
+        [ScriptName("fullname")]
+        public string Fullname;
         [ScriptName("lastname")]
         public string LastName;
         [ScriptName("preferredcontactmethodcode")]

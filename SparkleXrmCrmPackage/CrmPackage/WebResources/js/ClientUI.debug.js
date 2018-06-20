@@ -17,6 +17,7 @@ ClientUI.Model.Contact.prototype = {
     parentcustomerid: null,
     creditlimit: null,
     firstname: null,
+    fullname: null,
     lastname: null,
     preferredcontactmethodcode: null
 }
@@ -47,6 +48,16 @@ ClientUI.ViewModel.ContactViewModel = function ClientUI_ViewModel_ContactViewMod
     this.contacts.onDataLoaded.subscribe(ss.Delegate.create(this, this._contacts_OnDataLoaded$1));
     ClientUI.ViewModel.ObservableContact.registerValidation(this.contacts.validationBinder);
 }
+ClientUI.ViewModel.ContactViewModel.getAccountId = function ClientUI_ViewModel_ContactViewModel$getAccountId() {
+    var accountId = '50A82980-9574-E811-811A-5065F38BA241';
+    if (window.parent.Xrm.Page.ui != null) {
+        var guid = window.parent.Xrm.Page.data.entity.getId();
+        if (guid != null) {
+            accountId = guid.replaceAll('{', '').replaceAll('}', '');
+        }
+    }
+    return accountId;
+}
 ClientUI.ViewModel.ContactViewModel.prototype = {
     contacts: null,
     _recordCount$1: 10,
@@ -57,8 +68,6 @@ ClientUI.ViewModel.ContactViewModel.prototype = {
         var args = data;
         for (var i = 0; i < args.to + 1; i++) {
             var contact = this.contacts.getItem(i);
-            Xrm.Utility.alertDialog(String.format('First Name is {0}, Last Name is {1}, Credit limit is {2}', contact.firstname, contact.lastname, contact.creditlimit), function() {
-            });
             if (contact == null) {
                 return;
             }
@@ -66,20 +75,9 @@ ClientUI.ViewModel.ContactViewModel.prototype = {
         }
     },
     
-    _getAccountId$1: function ClientUI_ViewModel_ContactViewModel$_getAccountId$1() {
-        var accountId = '50A82980-9574-E811-811A-5065F38BA241';
-        if (window.parent.Xrm.Page.ui != null) {
-            var guid = window.parent.Xrm.Page.data.entity.getId();
-            if (guid != null) {
-                accountId = guid.replaceAll('{', '').replaceAll('}', '');
-            }
-        }
-        return accountId;
-    },
-    
     _contact_PropertyChanged$1: function ClientUI_ViewModel_ContactViewModel$_contact_PropertyChanged$1(sender, e) {
         var update = sender;
-        Xrm.Utility.alertDialog(String.format('First Name is {0}, Last Name is {1}, Credit limit is {2}', update.firstname, update.lastname, update.creditlimit), function() {
+        Xrm.Utility.alertDialog(String.format('First Name is {0}, Last Name is {1}, Credit limit is {2}', update.lastname, update.creditlimit), function() {
         });
         SparkleXrm.Sdk.OrganizationServiceProxy.beginUpdate(update, ss.Delegate.create(this, function(state) {
             try {
@@ -106,7 +104,7 @@ ClientUI.ViewModel.ContactViewModel.prototype = {
     },
     
     search: function ClientUI_ViewModel_ContactViewModel$search() {
-        this.contacts.set_fetchXml("<fetch version='1.0' output-format='xml-platform' mapping='logical'  returntotalrecordcount='true' no-lock='true' distinct='false' count='{0}' paging-cookie='{1}' page='{2}'>\r\n                                            <entity name='contact'>\r\n                                            <attribute name='firstname' />\r\n                                            <attribute name='lastname' />\r\n                                            <attribute name='preferredcontactmethodcode' />\r\n                                            <attribute name='creditlimit' />                                            \r\n                                            <attribute name='contactid' />\r\n                                            <order attribute='fullname' descending='false' />\r\n                                      <filter>\r\n                                        <condition attribute='parentcustomerid' operator='eq' value='" + this._getAccountId$1() + "' />\r\n                                       </filter>   \r\n                                            {3}\r\n                                            </entity>\r\n                                        </fetch>");
+        this.contacts.set_fetchXml("<fetch version='1.0' output-format='xml-platform' mapping='logical'  returntotalrecordcount='true' no-lock='true' distinct='false' count='{0}' paging-cookie='{1}' page='{2}'>\r\n                                            <entity name='contact'>\r\n                                            <attribute name='fullname' />\r\n                                            <attribute name='lastname' />\r\n                                            <attribute name='preferredcontactmethodcode' />\r\n                                            <attribute name='creditlimit' />                                            \r\n                                            <attribute name='contactid' />\r\n                                            <attribute name='parentcustomerid' />\r\n                                            <order attribute='fullname' descending='false' />\r\n                                      <filter>\r\n                                        <condition attribute='parentcustomerid' operator='eq' value='" + ClientUI.ViewModel.ContactViewModel.getAccountId() + "' />\r\n                                       </filter>   \r\n                                            {3}\r\n                                            </entity>\r\n                                        </fetch>");
     },
     
     AddNewCommand: function ClientUI_ViewModel_ContactViewModel$AddNewCommand() {
@@ -124,6 +122,7 @@ ClientUI.ViewModel.ObservableContact = function ClientUI_ViewModel_ObservableCon
     this.parentcustomerid = ko.observable();
     this.creditlimit = ko.observable();
     this.firstname = ko.observable();
+    this.fullname = ko.observable();
     this.lastname = ko.observable();
     this.preferredcontactmethodcode = ko.observable();
     ClientUI.ViewModel.ObservableContact.initializeBase(this);
@@ -168,9 +167,15 @@ ClientUI.ViewModel.ObservableContact.prototype = {
         }
         this.isBusy(true);
         var contact = new ClientUI.Model.Contact();
-        contact.parentcustomerid = this.parentcustomerid();
+        var accountId = '50A82980-9574-E811-811A-5065F38BA241';
+        if (window.parent.Xrm.Page.ui != null) {
+            var guid = window.parent.Xrm.Page.data.entity.getId();
+            if (guid != null) {
+                accountId = guid.replaceAll('{', '').replaceAll('}', '');
+            }
+        }
+        contact.parentcustomerid = new SparkleXrm.Sdk.EntityReference(new SparkleXrm.Sdk.Guid(accountId), 'account', null);
         contact.creditlimit = this.creditlimit();
-        contact.firstname = this.firstname();
         contact.lastname = this.lastname();
         contact.preferredcontactmethodcode = this.preferredcontactmethodcode();
         SparkleXrm.Sdk.OrganizationServiceProxy.beginCreate(contact, ss.Delegate.create(this, function(state) {
@@ -215,10 +220,10 @@ ClientUI.View.ContactView.Init = function ClientUI_View_ContactView$Init() {
     ClientUI.View.ContactView.vm = new ClientUI.ViewModel.ContactViewModel();
     var columns = [];
     SparkleXrm.GridEditor.GridDataViewBinder.addEditIndicatorColumn(columns);
-    SparkleXrm.GridEditor.XrmTextEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Nombre', 200, 'firstname'));
+    SparkleXrm.GridEditor.XrmTextEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Nombre completo', 200, 'fullname'));
     SparkleXrm.GridEditor.XrmTextEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Apellido', 200, 'lastname'));
-    SparkleXrm.GridEditor.XrmOptionSetEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Limite de credito', 200, 'preferredcontactmethodcode'), 'contact', 'preferredcontactmethodcode', false);
-    SparkleXrm.GridEditor.XrmMoneyEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Metodo de contacto', 200, 'preferredcontactmethodcode'), -1000, 100000000);
+    SparkleXrm.GridEditor.XrmOptionSetEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Metodo de contacto', 200, 'preferredcontactmethodcode'), 'contact', 'preferredcontactmethodcode', false);
+    SparkleXrm.GridEditor.XrmMoneyEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Limite de credito', 200, 'creditlimit'), -1000, 100000000);
     var contactGridDataBinder = new SparkleXrm.GridEditor.GridDataViewBinder();
     var contactsGrid = contactGridDataBinder.dataBindXrmGrid(ClientUI.View.ContactView.vm.contacts, columns, 'container', 'pager', true, true);
     contactGridDataBinder.bindCommitEdit(ClientUI.View.ContactView.vm);

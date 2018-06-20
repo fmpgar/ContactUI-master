@@ -2,6 +2,7 @@
 //
 
 using ClientUI.Model;
+using ClientUI.View;
 using KnockoutApi;
 using SparkleXrm;
 using SparkleXrm.GridEditor;
@@ -33,6 +34,8 @@ namespace ClientUI.ViewModel
         public Observable<Money> CreditLimit = Knockout.Observable<Money>();
         [ScriptName("firstname")]
         public Observable<string> FirstName = Knockout.Observable<string>();
+        [ScriptName("fullname")]
+        public Observable<string> FullName = Knockout.Observable<string>();
         [ScriptName("lastname")]
         public Observable<string> LastName = Knockout.Observable<string>();
         [ScriptName("preferredcontactmethodcode")]
@@ -51,12 +54,7 @@ namespace ClientUI.ViewModel
 
             return rules
                 .AddRequiredMsg(ResourceStrings.RequiredMessage);
-                
-                /*rules.AddRule(ResourceStrings.RequiredMessage, delegate(object value)
-            {
-                return (value != null);
-            });*/
-            
+           
         }
 
         public static ValidationRules ValidateLastName(ValidationRules rules, object viewModel, object dataContext)
@@ -102,9 +100,20 @@ namespace ClientUI.ViewModel
             IsBusy.SetValue(true);
 
             Contact contact = new Contact();
-            contact.ParentCustomerId = ParentCustomerId.GetValue();
+
+            string accountId = "50A82980-9574-E811-811A-5065F38BA241"; //debug
+            if (ParentPage.Ui != null)
+            {
+                string guid = ParentPage.Data.Entity.GetId();
+                if (guid != null)
+                    accountId = guid.Replace("{", "").Replace("}", "");
+            }
+
+
+            //contact.ParentCustomerId = ParentCustomerId.GetValue();
+            contact.ParentCustomerId = new EntityReference(new Guid(accountId), "account",null);
             contact.CreditLimit = CreditLimit.GetValue();
-            contact.FirstName = FirstName.GetValue();
+            //contact.FirstName = FirstName.GetValue();
             contact.LastName = LastName.GetValue();
             contact.PreferredContactMethodCode = PreferredContactMethodCode.GetValue();
 

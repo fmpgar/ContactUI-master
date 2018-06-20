@@ -31,16 +31,18 @@ namespace ClientUI.View
             List<Column> columns = new List<Column>();
             GridDataViewBinder.AddEditIndicatorColumn(columns);
 
+            //XrmTextEditor.BindColumn(
+            //              GridDataViewBinder.AddColumn(columns, "Nombre", 200, "firstname"));
             XrmTextEditor.BindColumn(
-                          GridDataViewBinder.AddColumn(columns, "Nombre", 200, "firstname"));
+                          GridDataViewBinder.AddColumn(columns, "Nombre completo", 200, "fullname"));
             XrmTextEditor.BindColumn(
   GridDataViewBinder.AddColumn(columns, "Apellido", 200, "lastname"));
 
             XrmOptionSetEditor.BindColumn(
-                GridDataViewBinder.AddColumn(columns, "Limite de credito", 200, "preferredcontactmethodcode"), "contact", "preferredcontactmethodcode", false);
+                GridDataViewBinder.AddColumn(columns, "Metodo de contacto", 200, "preferredcontactmethodcode"), "contact", "preferredcontactmethodcode", false);
             
             XrmMoneyEditor.BindColumn(
-    GridDataViewBinder.AddColumn(columns, "Metodo de contacto", 200, "preferredcontactmethodcode"), -1000, 100000000);
+    GridDataViewBinder.AddColumn(columns, "Limite de credito", 200, "creditlimit"), -1000, 100000000);
 
             GridDataViewBinder contactGridDataBinder = new GridDataViewBinder();
             Grid contactsGrid = contactGridDataBinder.DataBindXrmGrid(vm.Contacts, columns, "container", "pager", true, true);

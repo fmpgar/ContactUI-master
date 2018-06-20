@@ -52,7 +52,7 @@ namespace ClientUI.ViewModel
             for (int i = 0; i < args.To+1; i++)
             {
                 Contact contact = (Contact)Contacts.GetItem(i);
-                Utility.AlertDialog(String.Format("First Name is {0}, Last Name is {1}, Credit limit is {2}", contact.FirstName, contact.LastName, contact.CreditLimit), delegate() { });
+                //Utility.AlertDialog(String.Format("First Name is {0}, Last Name is {1}, Credit limit is {2}", contact.LastName, contact.CreditLimit), delegate() { });
                 if (contact == null)
                     return;
                 contact.PropertyChanged += contact_PropertyChanged;
@@ -60,7 +60,7 @@ namespace ClientUI.ViewModel
             }
         }
 
-        private string GetAccountId()
+        public static string GetAccountId()
         {
             string accountId = "50A82980-9574-E811-811A-5065F38BA241"; //debug
             if (ParentPage.Ui != null)
@@ -75,7 +75,7 @@ namespace ClientUI.ViewModel
         void contact_PropertyChanged(object sender, Xrm.ComponentModel.PropertyChangedEventArgs e)
         {
             Contact update = (Contact)sender;
-            Utility.AlertDialog(String.Format("First Name is {0}, Last Name is {1}, Credit limit is {2}", update.FirstName, update.LastName, update.CreditLimit), delegate() { });
+            Utility.AlertDialog(String.Format("First Name is {0}, Last Name is {1}, Credit limit is {2}", update.LastName, update.CreditLimit), delegate() { });
 
             OrganizationServiceProxy.BeginUpdate(update, delegate(object state)
             {
@@ -117,11 +117,12 @@ namespace ClientUI.ViewModel
            
             Contacts.FetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical'  returntotalrecordcount='true' no-lock='true' distinct='false' count='{0}' paging-cookie='{1}' page='{2}'>
                                             <entity name='contact'>
-                                            <attribute name='firstname' />
+                                            <attribute name='fullname' />
                                             <attribute name='lastname' />
                                             <attribute name='preferredcontactmethodcode' />
                                             <attribute name='creditlimit' />                                            
                                             <attribute name='contactid' />
+                                            <attribute name='parentcustomerid' />
                                             <order attribute='fullname' descending='false' />
                                       <filter>
                                         <condition attribute='parentcustomerid' operator='eq' value='" + GetAccountId() + @"' />
