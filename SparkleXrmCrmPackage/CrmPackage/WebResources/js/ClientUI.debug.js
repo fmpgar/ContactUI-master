@@ -210,7 +210,7 @@ ClientUI.View.ContactView.Init = function ClientUI_View_ContactView$Init() {
     SparkleXrm.GridEditor.XrmOptionSetEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, ResourceStrings.PreferredContactType, 200, 'preferredcontactmethodcode'), 'contact', 'preferredcontactmethodcode', false);
     SparkleXrm.GridEditor.XrmMoneyEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, ResourceStrings.CreditLimit, 200, 'creditlimit'), -1000, 100000000);
     var contactGridDataBinder = new SparkleXrm.GridEditor.GridDataViewBinder();
-    var contactsGrid = contactGridDataBinder.dataBindXrmGrid(ClientUI.View.ContactView.vm.contacts, columns, 'container', 'pager', true, true);
+    var contactsGrid = contactGridDataBinder.dataBindXrmGrid(ClientUI.View.ContactView.vm.contacts, columns, 'container', 'pager', true, false);
     contactGridDataBinder.bindCommitEdit(ClientUI.View.ContactView.vm);
     contactGridDataBinder.bindClickHandler(contactsGrid);
     SparkleXrm.ViewBase.registerViewModel(ClientUI.View.ContactView.vm);
