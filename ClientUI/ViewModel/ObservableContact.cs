@@ -34,8 +34,6 @@ namespace ClientUI.ViewModel
         public Observable<Money> CreditLimit = Knockout.Observable<Money>();
         [ScriptName("firstname")]
         public Observable<string> FirstName = Knockout.Observable<string>();
-        [ScriptName("fullname")]
-        public Observable<string> FullName = Knockout.Observable<string>();
         [ScriptName("lastname")]
         public Observable<string> LastName = Knockout.Observable<string>();
         [ScriptName("preferredcontactmethodcode")]
@@ -83,7 +81,7 @@ namespace ClientUI.ViewModel
 
             Contact contact = new Contact();
 
-            string accountId = string.Empty; //debug
+            string accountId = string.Empty; 
             if (ParentPage.Ui != null)
             {
                 string guid = ParentPage.Data.Entity.GetId();
@@ -92,7 +90,7 @@ namespace ClientUI.ViewModel
             }
 
 
-            //contact.ParentCustomerId = ParentCustomerId.GetValue();
+            //Asociamos los datos de la entidad contacto
             contact.ParentCustomerId = new EntityReference(new Guid(accountId), "account",null);
             contact.CreditLimit = CreditLimit.GetValue();
             contact.firstname = FirstName.GetValue();
@@ -118,73 +116,6 @@ namespace ClientUI.ViewModel
                 }
             });
         }
-
-        //Abrir Grid Asociado
-        [PreserveCase]
-        public void OpenAssociatedSubGridCommand()
-        { 
-            //Test
-            NavigationItem item = ParentPage.Ui.Navigation.Items.Get("navContacts");
-            item.SetFocus();
-        }
-
-        public void contactSearchCommand(Guid account, Action<EntityCollection> callback)
-        {
-                  string contactFetchXml = String.Format(@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
-                                          <entity name='contact'>
-                                            <attribute name='fullname' />
-                                            <attribute name='telephone1' />
-                                            <attribute name='contactid' />
-                                            <order attribute='fullname' descending='false' />
-                                            <filter type='and'>
-                                              <condition attribute='parentcustomerid' operator='eq' uiname='A. Datum' uitype='account' value='{0}' />
-                                            </filter>
-                                          </entity>
-                                        </fetch>", Guid.Empty);
-
-                  OrganizationServiceProxy.BeginRetrieveMultiple(contactFetchXml, delegate(object result) 
-                  {
-                      EntityCollection contactFetchResult = OrganizationServiceProxy.EndRetrieveMultiple(result, typeof(Entity));
-                      callback(contactFetchResult);
-                    
-                  });
-
-
-
-        }
-        
-        /*public Dictionary<int?, string> getPrimaryContactMethod(string attributeName, string entityName)
-        {
-          
-            Dictionary<int?, string> result = new Dictionary<int?, string>();
-            UserSettings userSettings = OrganizationServiceProxy.GetUserSettings();
-            
-
-            RetrieveAttributeRequest attributeRequest = new RetrieveAttributeRequest 
-            {
-                EntityLogicalName = entityName,
-                LogicalName = attributeName,
-                RetrieveAsIfPublished = true
-            };
-
-            // Get the response
-            RetrieveAttributeResponse attributeResponse = (RetrieveAttributeResponse)OrganizationServiceProxy.Execute(attributeRequest);
-
-            // Cast the response to attribute meta data
-            AttributeMetadata attrMetadata = (AttributeMetadata)attributeResponse.AttributeMetadata;
-            // Cast AttributeMetadata to StatusAttributeMetadata
-            PicklistAttributeMetadata stateMetadata = (PicklistAttributeMetadata)attrMetadata;
-
-            //Loop through each option and get value & label
-            foreach (OptionMetadata optionMeta in stateMetadata.OptionSet.Options)
-            {
-                result.Add(optionMeta.Value, optionMeta.Label.UserLocalizedLabel.Label);
-                //To get  the mapping  state code
-                //int stateOptionValue = (int)((StatusOptionMetadata)optionMeta).State;
-            }
-
-            return result;
-        }*/
         #endregion
     }
 }

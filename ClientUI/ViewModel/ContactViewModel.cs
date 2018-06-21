@@ -149,6 +149,15 @@ namespace ClientUI.ViewModel
         {
             ContactEdit.GetValue().AddNewVisible.SetValue(true);
         }
+
+        //Abrir Grid Asociado
+        [PreserveCase]
+        public void OpenAssociatedSubGridCommand()
+        {
+            //abrir vista asociada de contacto
+            NavigationItem item = ParentPage.Ui.Navigation.Items.Get("navContacts");
+            item.SetFocus();
+        }
         #endregion
     }
 }

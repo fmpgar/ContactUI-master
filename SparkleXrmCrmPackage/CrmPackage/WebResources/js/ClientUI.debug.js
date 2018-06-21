@@ -112,6 +112,13 @@ ClientUI.ViewModel.ContactViewModel.prototype = {
     
     AddNewCommand: function ClientUI_ViewModel_ContactViewModel$AddNewCommand() {
         this.ContactEdit().AddNewVisible(true);
+    },
+    
+    OpenAssociatedSubGridCommand: function ClientUI_ViewModel_ContactViewModel$OpenAssociatedSubGridCommand() {
+        Xrm.Utility.alertDialog('aa', function() {
+        });
+        var item = window.parent.Xrm.Page.ui.navigation.items.get('navContacts');
+        item.setFocus();
     }
 }
 
@@ -189,6 +196,8 @@ ClientUI.ViewModel.ObservableContact.prototype = {
     },
     
     OpenAssociatedSubGridCommand: function ClientUI_ViewModel_ObservableContact$OpenAssociatedSubGridCommand() {
+        Xrm.Utility.alertDialog('aa', function() {
+        });
         var item = window.parent.Xrm.Page.ui.navigation.items.get('navContacts');
         item.setFocus();
     },
