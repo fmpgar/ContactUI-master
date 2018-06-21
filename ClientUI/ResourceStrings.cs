@@ -16,7 +16,7 @@ namespace ClientUI
         [PreserveCase]
         public static string SaveButton = OrganizationServiceProxy.GetUserSettings().UILanguageId.Value == 3082 ? "Guardar" : "Save";
         [PreserveCase]
-        public static string CancelButton = OrganizationServiceProxy.GetUserSettings().UILanguageId.Value == 3082 ? "Cancelar" :"Cancel";
+        public static string CancelButton = OrganizationServiceProxy.GetUserSettings().UILanguageId.Value == 3082 ? "Cancelar" : "Cancel";
 
         [PreserveCase]
         public static string Contacts = OrganizationServiceProxy.GetUserSettings().UILanguageId.Value == 3082 ? "Contacto" : "Contacts";
@@ -28,7 +28,6 @@ namespace ClientUI
         public static string CreditLimit = OrganizationServiceProxy.GetUserSettings().UILanguageId.Value == 3082 ? "Limite de credito" : "Credit Limit";
         [PreserveCase]
         public static string PreferredContactType = OrganizationServiceProxy.GetUserSettings().UILanguageId.Value == 3082 ? "Metodo de contacto" : "Preferred Contact Method";
-
 
     }
 }

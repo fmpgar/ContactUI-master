@@ -115,8 +115,6 @@ ClientUI.ViewModel.ContactViewModel.prototype = {
     },
     
     OpenAssociatedSubGridCommand: function ClientUI_ViewModel_ContactViewModel$OpenAssociatedSubGridCommand() {
-        Xrm.Utility.alertDialog('aa', function() {
-        });
         var item = window.parent.Xrm.Page.ui.navigation.items.get('navContacts');
         item.setFocus();
     }
@@ -132,7 +130,6 @@ ClientUI.ViewModel.ObservableContact = function ClientUI_ViewModel_ObservableCon
     this.parentcustomerid = ko.observable();
     this.creditlimit = ko.observable();
     this.firstname = ko.observable();
-    this.fullname = ko.observable();
     this.lastname = ko.observable();
     this.preferredcontactmethodcode = ko.observable();
     ClientUI.ViewModel.ObservableContact.initializeBase(this);
@@ -193,21 +190,6 @@ ClientUI.ViewModel.ObservableContact.prototype = {
                 this.AddNewVisible(false);
             }
         }));
-    },
-    
-    OpenAssociatedSubGridCommand: function ClientUI_ViewModel_ObservableContact$OpenAssociatedSubGridCommand() {
-        Xrm.Utility.alertDialog('aa', function() {
-        });
-        var item = window.parent.Xrm.Page.ui.navigation.items.get('navContacts');
-        item.setFocus();
-    },
-    
-    contactSearchCommand: function ClientUI_ViewModel_ObservableContact$contactSearchCommand(account, callback) {
-        var contactFetchXml = String.format("<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>\r\n                                          <entity name='contact'>\r\n                                            <attribute name='fullname' />\r\n                                            <attribute name='telephone1' />\r\n                                            <attribute name='contactid' />\r\n                                            <order attribute='fullname' descending='false' />\r\n                                            <filter type='and'>\r\n                                              <condition attribute='parentcustomerid' operator='eq' uiname='A. Datum' uitype='account' value='{0}' />\r\n                                            </filter>\r\n                                          </entity>\r\n                                        </fetch>", SparkleXrm.Sdk.Guid.empty);
-        SparkleXrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(contactFetchXml, function(result) {
-            var contactFetchResult = SparkleXrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(result, SparkleXrm.Sdk.Entity);
-            callback(contactFetchResult);
-        });
     }
 }
 
@@ -230,6 +212,7 @@ ClientUI.View.ContactView.Init = function ClientUI_View_ContactView$Init() {
     var contactGridDataBinder = new SparkleXrm.GridEditor.GridDataViewBinder();
     var contactsGrid = contactGridDataBinder.dataBindXrmGrid(ClientUI.View.ContactView.vm.contacts, columns, 'container', 'pager', true, true);
     contactGridDataBinder.bindCommitEdit(ClientUI.View.ContactView.vm);
+    contactGridDataBinder.bindClickHandler(contactsGrid);
     SparkleXrm.ViewBase.registerViewModel(ClientUI.View.ContactView.vm);
     window.setTimeout(function() {
         ClientUI.View.ContactView.vm.search();

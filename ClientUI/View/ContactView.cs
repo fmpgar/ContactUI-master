@@ -25,7 +25,6 @@ namespace ClientUI.View
         [PreserveCase]
         public static void Init()
         {
-
             vm = new ContactViewModel();
 
             List<Column> columns = new List<Column>();
@@ -47,6 +46,8 @@ namespace ClientUI.View
             GridDataViewBinder contactGridDataBinder = new GridDataViewBinder();
             Grid contactsGrid = contactGridDataBinder.DataBindXrmGrid(vm.Contacts, columns, "container", "pager", true, true);
             contactGridDataBinder.BindCommitEdit(vm);
+
+            contactGridDataBinder.BindClickHandler(contactsGrid);
 
             ViewBase.RegisterViewModel(vm);
             Window.SetTimeout(delegate ()
