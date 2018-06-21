@@ -52,7 +52,7 @@ namespace ClientUI.ViewModel
             for (int i = 0; i < args.To+1; i++)
             {
                 Contact contact = (Contact)Contacts.GetItem(i);
-                //Utility.AlertDialog(String.Format("First Name is {0}, Last Name is {1}, Credit limit is {2}", contact.LastName, contact.CreditLimit), delegate() { });
+                
                 if (contact == null)
                     return;
                 contact.PropertyChanged += contact_PropertyChanged;
@@ -75,23 +75,30 @@ namespace ClientUI.ViewModel
         void contact_PropertyChanged(object sender, Xrm.ComponentModel.PropertyChangedEventArgs e)
         {
             Contact update = (Contact)sender;
-            Utility.AlertDialog(String.Format("First Name is {0}, Last Name is {1}, Credit limit is {2}", update.LastName, update.CreditLimit), delegate() { });
+            //Utility.AlertDialog(String.Format("Actualizar nombre {0}, apellido {1},limite de credito is {2}{3}{4}", update.firstname, update.LastName, update.CreditLimit,update.ContactId,update.LogicalName), delegate() { });
 
-            OrganizationServiceProxy.BeginUpdate(update, delegate(object state)
+            if (String.IsNullOrEmpty(update.LastName))
             {
-                try
+                ErrorMessage.SetValue(string.Format("{0} {1}",ResourceStrings.LastName, ResourceStrings.RequiredMessage));
+            }
+            else
+            {
+                OrganizationServiceProxy.BeginUpdate(update, delegate (object state)
                 {
-                    OrganizationServiceProxy.Update(update);
-                    ErrorMessage.SetValue("");
-                }
-                catch(Exception ex)
-                {
-                    ErrorMessage.SetValue(ex.Message);
-                }
-                finally
-                {
-                }
-            });
+                    try
+                    {
+                        OrganizationServiceProxy.Update(update);
+                        ErrorMessage.SetValue(null);
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrorMessage.SetValue(ex.Message);
+                    }
+                    finally
+                    {
+                    }
+                });
+            }
         }
 
         void ContactViewModel_OnSaveComplete(string result)

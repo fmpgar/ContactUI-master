@@ -77,19 +77,22 @@ ClientUI.ViewModel.ContactViewModel.prototype = {
     
     _contact_PropertyChanged$1: function ClientUI_ViewModel_ContactViewModel$_contact_PropertyChanged$1(sender, e) {
         var update = sender;
-        Xrm.Utility.alertDialog(String.format('First Name is {0}, Last Name is {1}, Credit limit is {2}', update.lastname, update.creditlimit), function() {
-        });
-        SparkleXrm.Sdk.OrganizationServiceProxy.beginUpdate(update, ss.Delegate.create(this, function(state) {
-            try {
-                SparkleXrm.Sdk.OrganizationServiceProxy.update(update);
-                this.ErrorMessage('');
-            }
-            catch (ex) {
-                this.ErrorMessage(ex.message);
-            }
-            finally {
-            }
-        }));
+        if (String.isNullOrEmpty(update.lastname)) {
+            this.ErrorMessage(String.format('{0} {1}', ResourceStrings.LastName, ResourceStrings.RequiredMessage));
+        }
+        else {
+            SparkleXrm.Sdk.OrganizationServiceProxy.beginUpdate(update, ss.Delegate.create(this, function(state) {
+                try {
+                    SparkleXrm.Sdk.OrganizationServiceProxy.update(update);
+                    this.ErrorMessage(null);
+                }
+                catch (ex) {
+                    this.ErrorMessage(ex.message);
+                }
+                finally {
+                }
+            }));
+        }
     },
     
     _contactViewModel_OnSaveComplete$1: function ClientUI_ViewModel_ContactViewModel$_contactViewModel_OnSaveComplete$1(result) {
@@ -191,7 +194,7 @@ ClientUI.ViewModel.ObservableContact.prototype = {
     },
     
     contactSearchCommand: function ClientUI_ViewModel_ObservableContact$contactSearchCommand(account, callback) {
-        var contactFetchXml = String.format("<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>\n                                          <entity name='contact'>\n                                            <attribute name='fullname' />\n                                            <attribute name='telephone1' />\n                                            <attribute name='contactid' />\n                                            <order attribute='fullname' descending='false' />\n                                            <filter type='and'>\n                                              <condition attribute='parentcustomerid' operator='eq' uiname='A. Datum' uitype='account' value='{0}' />\n                                            </filter>\n                                          </entity>\n                                        </fetch>", SparkleXrm.Sdk.Guid.empty);
+        var contactFetchXml = String.format("<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>\r\n                                          <entity name='contact'>\r\n                                            <attribute name='fullname' />\r\n                                            <attribute name='telephone1' />\r\n                                            <attribute name='contactid' />\r\n                                            <order attribute='fullname' descending='false' />\r\n                                            <filter type='and'>\r\n                                              <condition attribute='parentcustomerid' operator='eq' uiname='A. Datum' uitype='account' value='{0}' />\r\n                                            </filter>\r\n                                          </entity>\r\n                                        </fetch>", SparkleXrm.Sdk.Guid.empty);
         SparkleXrm.Sdk.OrganizationServiceProxy.beginRetrieveMultiple(contactFetchXml, function(result) {
             var contactFetchResult = SparkleXrm.Sdk.OrganizationServiceProxy.endRetrieveMultiple(result, SparkleXrm.Sdk.Entity);
             callback(contactFetchResult);
