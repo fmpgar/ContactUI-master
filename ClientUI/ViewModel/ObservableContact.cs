@@ -45,48 +45,30 @@ namespace ClientUI.ViewModel
         public ObservableContact()
         {
             ObservableContact.RegisterValidation(new ObservableValidationBinder(this));
-        }
-
-        
-
-        public static ValidationRules ValidateCreditLimit(ValidationRules rules, object viewModel, object dataContext)
-        {
-
-            return rules
-                .AddRequiredMsg(ResourceStrings.RequiredMessage);
-           
-        }
-
+        }    
+              
+        //Validacion Apellido
         public static ValidationRules ValidateLastName(ValidationRules rules, object viewModel, object dataContext)
         {
             return rules
                 .AddRequiredMsg(ResourceStrings.RequiredMessage);
         }
 
-        public static ValidationRules ValidatePreferredContactMethodCode(ValidationRules rules, object viewModel, object dataContext)
-        {
-            return rules
-                .AddRule("Preferred Contact Method is required", delegate(object value)
-                {
-                    return (value != null) && ((OptionSetValue)value).Value != null;
-                });
-        }
 
         public static void RegisterValidation(ValidationBinder binder)
         {
             binder.Register("lastname", ValidateLastName);
-            binder.Register("creditlimit", ValidateCreditLimit);
-            binder.Register("preferredcontactmethodcode", ValidatePreferredContactMethodCode);
         }
         
 
         #region Commands
+        //Comando cancelar
         [PreserveCase]
         public void CancelCommand()
         {
             this.AddNewVisible.SetValue(false);
         }
-
+        //Comando salvar
         [PreserveCase]
         public void SaveCommand()
         {
@@ -101,7 +83,7 @@ namespace ClientUI.ViewModel
 
             Contact contact = new Contact();
 
-            string accountId = "50A82980-9574-E811-811A-5065F38BA241"; //debug
+            string accountId = string.Empty; //debug
             if (ParentPage.Ui != null)
             {
                 string guid = ParentPage.Data.Entity.GetId();
@@ -113,7 +95,7 @@ namespace ClientUI.ViewModel
             //contact.ParentCustomerId = ParentCustomerId.GetValue();
             contact.ParentCustomerId = new EntityReference(new Guid(accountId), "account",null);
             contact.CreditLimit = CreditLimit.GetValue();
-            //contact.FirstName = FirstName.GetValue();
+            contact.firstname = FirstName.GetValue();
             contact.LastName = LastName.GetValue();
             contact.PreferredContactMethodCode = PreferredContactMethodCode.GetValue();
 
@@ -137,11 +119,12 @@ namespace ClientUI.ViewModel
             });
         }
 
+        //Abrir Grid Asociado
         [PreserveCase]
         public void OpenAssociatedSubGridCommand()
         { 
             //Test
-            NavigationItem item = ParentPage.Ui.Navigation.Items.Get("navConnections");
+            NavigationItem item = ParentPage.Ui.Navigation.Items.Get("navContacts");
             item.SetFocus();
         }
 

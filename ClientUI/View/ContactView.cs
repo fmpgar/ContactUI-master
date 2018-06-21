@@ -31,19 +31,19 @@ namespace ClientUI.View
             List<Column> columns = new List<Column>();
             GridDataViewBinder.AddEditIndicatorColumn(columns);
 
-            //XrmTextEditor.BindColumn(
-            //              GridDataViewBinder.AddColumn(columns, "Nombre", 200, "firstname"));
+            //Creacion de columnas para el grid
             XrmTextEditor.BindColumn(
-                          GridDataViewBinder.AddColumn(columns, "Nombre completo", 200, "fullname"));
+                          GridDataViewBinder.AddColumn(columns, ResourceStrings.FirstName, 200, "firstname"));
             XrmTextEditor.BindColumn(
-  GridDataViewBinder.AddColumn(columns, "Apellido", 200, "lastname"));
+  GridDataViewBinder.AddColumn(columns, ResourceStrings.LastName, 200, "lastname"));
 
             XrmOptionSetEditor.BindColumn(
-                GridDataViewBinder.AddColumn(columns, "Metodo de contacto", 200, "preferredcontactmethodcode"), "contact", "preferredcontactmethodcode", false);
-            
-            XrmMoneyEditor.BindColumn(
-    GridDataViewBinder.AddColumn(columns, "Limite de credito", 200, "creditlimit"), -1000, 100000000);
+                GridDataViewBinder.AddColumn(columns, ResourceStrings.PreferredContactType, 200, "preferredcontactmethodcode"), "contact", "preferredcontactmethodcode", false);
 
+            XrmMoneyEditor.BindColumn(
+    GridDataViewBinder.AddColumn(columns, ResourceStrings.CreditLimit, 200, "creditlimit"), -1000, 100000000);
+
+            //Montar grid
             GridDataViewBinder contactGridDataBinder = new GridDataViewBinder();
             Grid contactsGrid = contactGridDataBinder.DataBindXrmGrid(vm.Contacts, columns, "container", "pager", true, true);
             contactGridDataBinder.BindCommitEdit(vm);
@@ -56,9 +56,15 @@ namespace ClientUI.View
             }, 0);
 
 
+            /*CAMBIO DE IDIOMA A TRAVES DE JAVASCRIPT*/
             //int lcid = OrganizationServiceProxy.GetUserSettings().UILanguageId.Value;
-            /*LocalisedContentLoader.LoadContent("dev1_/js/Res.metadata.js", lcid, delegate() {
-                ViewBase.RegisterViewModel(vm);*/
+            
+            //LocalisedContentLoader.LoadContent("fmp_/js/Res.metadata.js", lcid, delegate ()
+            //{
+
+            //    ViewBase.RegisterViewModel(vm);
+            //}); 
+
 
         }
     }

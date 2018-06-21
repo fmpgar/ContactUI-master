@@ -1,10 +1,10 @@
-﻿ResourceStrings.RequiredMessage = 'Required';
-ResourceStrings.SaveButton = 'Save';
-ResourceStrings.CancelButton = 'Cancel';
+﻿ResourceStrings.RequiredMessage = 'Requerido';
+ResourceStrings.SaveButton = 'Guardar';
+ResourceStrings.CancelButton = 'Cancelar';
 
 
-ResourceStrings.Contacts = 'Contacts';
-ResourceStrings.FirstName = 'First Name';
-ResourceStrings.LastName = 'Last Name';
-ResourceStrings.CreditLimit = 'Credit Limit';
-ResourceStrings.PreferredContactType = 'Preferred Contact Method';
+ResourceStrings.Contacts = 'Contacto';
+ResourceStrings.FirstName = 'Nombre';
+ResourceStrings.LastName = 'Apellido';
+ResourceStrings.CreditLimit = 'Limite de credito';
+ResourceStrings.PreferredContactType = 'Metodo de contacto';

@@ -49,7 +49,7 @@ ClientUI.ViewModel.ContactViewModel = function ClientUI_ViewModel_ContactViewMod
     ClientUI.ViewModel.ObservableContact.registerValidation(this.contacts.validationBinder);
 }
 ClientUI.ViewModel.ContactViewModel.getAccountId = function ClientUI_ViewModel_ContactViewModel$getAccountId() {
-    var accountId = '50A82980-9574-E811-811A-5065F38BA241';
+    var accountId = '';
     if (window.parent.Xrm.Page.ui != null) {
         var guid = window.parent.Xrm.Page.data.entity.getId();
         if (guid != null) {
@@ -104,7 +104,7 @@ ClientUI.ViewModel.ContactViewModel.prototype = {
     },
     
     search: function ClientUI_ViewModel_ContactViewModel$search() {
-        this.contacts.set_fetchXml("<fetch version='1.0' output-format='xml-platform' mapping='logical'  returntotalrecordcount='true' no-lock='true' distinct='false' count='{0}' paging-cookie='{1}' page='{2}'>\r\n                                            <entity name='contact'>\r\n                                            <attribute name='fullname' />\r\n                                            <attribute name='lastname' />\r\n                                            <attribute name='preferredcontactmethodcode' />\r\n                                            <attribute name='creditlimit' />                                            \r\n                                            <attribute name='contactid' />\r\n                                            <attribute name='parentcustomerid' />\r\n                                            <order attribute='fullname' descending='false' />\r\n                                      <filter>\r\n                                        <condition attribute='parentcustomerid' operator='eq' value='" + ClientUI.ViewModel.ContactViewModel.getAccountId() + "' />\r\n                                       </filter>   \r\n                                            {3}\r\n                                            </entity>\r\n                                        </fetch>");
+        this.contacts.set_fetchXml("<fetch version='1.0' output-format='xml-platform' mapping='logical'  returntotalrecordcount='true' no-lock='true' distinct='false' count='{0}' paging-cookie='{1}' page='{2}'>\r\n                                            <entity name='contact'>\r\n                                            <attribute name='firstname' />\r\n                                            <attribute name='lastname' />\r\n                                            <attribute name='preferredcontactmethodcode' />\r\n                                            <attribute name='creditlimit' />                                            \r\n                                            <attribute name='contactid' />\r\n                                            <attribute name='parentcustomerid' />\r\n                                            <order attribute='fullname' descending='false' />\r\n                                      <filter>\r\n                                        <condition attribute='parentcustomerid' operator='eq' value='" + ClientUI.ViewModel.ContactViewModel.getAccountId() + "' />\r\n                                       </filter>   \r\n                                            {3}\r\n                                            </entity>\r\n                                        </fetch>");
     },
     
     AddNewCommand: function ClientUI_ViewModel_ContactViewModel$AddNewCommand() {
@@ -128,21 +128,11 @@ ClientUI.ViewModel.ObservableContact = function ClientUI_ViewModel_ObservableCon
     ClientUI.ViewModel.ObservableContact.initializeBase(this);
     ClientUI.ViewModel.ObservableContact.registerValidation(new SparkleXrm.ObservableValidationBinder(this));
 }
-ClientUI.ViewModel.ObservableContact.validateCreditLimit = function ClientUI_ViewModel_ObservableContact$validateCreditLimit(rules, viewModel, dataContext) {
-    return rules.addRequiredMsg(ResourceStrings.RequiredMessage);
-}
 ClientUI.ViewModel.ObservableContact.validateLastName = function ClientUI_ViewModel_ObservableContact$validateLastName(rules, viewModel, dataContext) {
     return rules.addRequiredMsg(ResourceStrings.RequiredMessage);
 }
-ClientUI.ViewModel.ObservableContact.validatePreferredContactMethodCode = function ClientUI_ViewModel_ObservableContact$validatePreferredContactMethodCode(rules, viewModel, dataContext) {
-    return rules.addRule('Preferred Contact Method is required', function(value) {
-        return (value != null) && (value).value != null;
-    });
-}
 ClientUI.ViewModel.ObservableContact.registerValidation = function ClientUI_ViewModel_ObservableContact$registerValidation(binder) {
     binder.register('lastname', ClientUI.ViewModel.ObservableContact.validateLastName);
-    binder.register('creditlimit', ClientUI.ViewModel.ObservableContact.validateCreditLimit);
-    binder.register('preferredcontactmethodcode', ClientUI.ViewModel.ObservableContact.validatePreferredContactMethodCode);
 }
 ClientUI.ViewModel.ObservableContact.prototype = {
     
@@ -167,7 +157,7 @@ ClientUI.ViewModel.ObservableContact.prototype = {
         }
         this.isBusy(true);
         var contact = new ClientUI.Model.Contact();
-        var accountId = '50A82980-9574-E811-811A-5065F38BA241';
+        var accountId = '';
         if (window.parent.Xrm.Page.ui != null) {
             var guid = window.parent.Xrm.Page.data.entity.getId();
             if (guid != null) {
@@ -176,6 +166,7 @@ ClientUI.ViewModel.ObservableContact.prototype = {
         }
         contact.parentcustomerid = new SparkleXrm.Sdk.EntityReference(new SparkleXrm.Sdk.Guid(accountId), 'account', null);
         contact.creditlimit = this.creditlimit();
+        contact.firstname = this.firstname();
         contact.lastname = this.lastname();
         contact.preferredcontactmethodcode = this.preferredcontactmethodcode();
         SparkleXrm.Sdk.OrganizationServiceProxy.beginCreate(contact, ss.Delegate.create(this, function(state) {
@@ -195,7 +186,7 @@ ClientUI.ViewModel.ObservableContact.prototype = {
     },
     
     OpenAssociatedSubGridCommand: function ClientUI_ViewModel_ObservableContact$OpenAssociatedSubGridCommand() {
-        var item = window.parent.Xrm.Page.ui.navigation.items.get('navConnections');
+        var item = window.parent.Xrm.Page.ui.navigation.items.get('navContacts');
         item.setFocus();
     },
     
@@ -220,10 +211,10 @@ ClientUI.View.ContactView.Init = function ClientUI_View_ContactView$Init() {
     ClientUI.View.ContactView.vm = new ClientUI.ViewModel.ContactViewModel();
     var columns = [];
     SparkleXrm.GridEditor.GridDataViewBinder.addEditIndicatorColumn(columns);
-    SparkleXrm.GridEditor.XrmTextEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Nombre completo', 200, 'fullname'));
-    SparkleXrm.GridEditor.XrmTextEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Apellido', 200, 'lastname'));
-    SparkleXrm.GridEditor.XrmOptionSetEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Metodo de contacto', 200, 'preferredcontactmethodcode'), 'contact', 'preferredcontactmethodcode', false);
-    SparkleXrm.GridEditor.XrmMoneyEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, 'Limite de credito', 200, 'creditlimit'), -1000, 100000000);
+    SparkleXrm.GridEditor.XrmTextEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, ResourceStrings.FirstName, 200, 'firstname'));
+    SparkleXrm.GridEditor.XrmTextEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, ResourceStrings.LastName, 200, 'lastname'));
+    SparkleXrm.GridEditor.XrmOptionSetEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, ResourceStrings.PreferredContactType, 200, 'preferredcontactmethodcode'), 'contact', 'preferredcontactmethodcode', false);
+    SparkleXrm.GridEditor.XrmMoneyEditor.bindColumn(SparkleXrm.GridEditor.GridDataViewBinder.addColumn(columns, ResourceStrings.CreditLimit, 200, 'creditlimit'), -1000, 100000000);
     var contactGridDataBinder = new SparkleXrm.GridEditor.GridDataViewBinder();
     var contactsGrid = contactGridDataBinder.dataBindXrmGrid(ClientUI.View.ContactView.vm.contacts, columns, 'container', 'pager', true, true);
     contactGridDataBinder.bindCommitEdit(ClientUI.View.ContactView.vm);
@@ -240,14 +231,14 @@ ResourceStrings.registerClass('ResourceStrings');
 ClientUI.ViewModel.ContactViewModel.registerClass('ClientUI.ViewModel.ContactViewModel', SparkleXrm.ViewModelBase);
 ClientUI.ViewModel.ObservableContact.registerClass('ClientUI.ViewModel.ObservableContact', SparkleXrm.ViewModelBase);
 ClientUI.View.ContactView.registerClass('ClientUI.View.ContactView');
-ResourceStrings.RequiredMessage = 'Required';
-ResourceStrings.SaveButton = 'Save';
-ResourceStrings.CancelButton = 'Cancel';
-ResourceStrings.Contacts = 'Contacts';
-ResourceStrings.FirstName = 'First Name';
-ResourceStrings.LastName = 'Last Name';
-ResourceStrings.CreditLimit = 'Credit Limit';
-ResourceStrings.PreferredContactType = 'Preferred Contact Method';
+ResourceStrings.RequiredMessage = (SparkleXrm.Sdk.OrganizationServiceProxy.getUserSettings().uilanguageid === 3082) ? 'Requerido' : 'Required';
+ResourceStrings.SaveButton = (SparkleXrm.Sdk.OrganizationServiceProxy.getUserSettings().uilanguageid === 3082) ? 'Guardar' : 'Save';
+ResourceStrings.CancelButton = (SparkleXrm.Sdk.OrganizationServiceProxy.getUserSettings().uilanguageid === 3082) ? 'Cancelar' : 'Cancel';
+ResourceStrings.Contacts = (SparkleXrm.Sdk.OrganizationServiceProxy.getUserSettings().uilanguageid === 3082) ? 'Contacto' : 'Contacts';
+ResourceStrings.FirstName = (SparkleXrm.Sdk.OrganizationServiceProxy.getUserSettings().uilanguageid === 3082) ? 'Nombre' : 'First Name';
+ResourceStrings.LastName = (SparkleXrm.Sdk.OrganizationServiceProxy.getUserSettings().uilanguageid === 3082) ? 'Apellido' : 'Last Name';
+ResourceStrings.CreditLimit = (SparkleXrm.Sdk.OrganizationServiceProxy.getUserSettings().uilanguageid === 3082) ? 'Limite de credito' : 'Credit Limit';
+ResourceStrings.PreferredContactType = (SparkleXrm.Sdk.OrganizationServiceProxy.getUserSettings().uilanguageid === 3082) ? 'Metodo de contacto' : 'Preferred Contact Method';
 ClientUI.View.ContactView.vm = null;
 ClientUI.View.ContactView.contactsGrid = null;
 ClientUI.View.ContactView.currentUserSettings = null;

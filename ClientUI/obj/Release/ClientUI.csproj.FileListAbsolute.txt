@@ -2,3 +2,4 @@ D:\Personal\Self\Career 2016\SG JLL\ContactsUI\SparkleXrmCrmPackage\CrmPackage\W
 D:\Personal\Self\Career 2016\SG JLL\ContactsUI\ClientUI\obj\Release\ClientUI.dll
 C:\ContactUI-master\SparkleXrmCrmPackage\CrmPackage\WebResources\js\ClientUI.dll
 C:\ContactUI-master\ClientUI\obj\Release\ClientUI.dll
+C:\ContactUI-master\ClientUI\obj\Release\ClientUI.csprojResolveAssemblyReference.cache

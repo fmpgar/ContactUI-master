@@ -61,9 +61,14 @@
       <UniqueName>fmp_/js/ClientUI.js</UniqueName>
       <WebResourceType>Script</WebResourceType>
     </CRMWebResource>
+    <CRMWebResource Include="WebResources\js\Res.metadata_1033.js">
+      <DisplayName>fmp_/js/Res.metadata_1033.js</DisplayName>
+      <UniqueName>fmp_/js/Res.metadata_1033.js</UniqueName>
+      <WebResourceType>Script</WebResourceType>
+    </CRMWebResource>
     <CRMWebResource Include="WebResources\js\Res.metadata_3082.js">
-      <DisplayName>fmp_/js/Res_metadata_3082</DisplayName>
-      <UniqueName>fmp_/js/dev_Res_metadata_3082</UniqueName>
+      <DisplayName>fmp_/js/Res.metadata_3082.js</DisplayName>
+      <UniqueName>fmp_/js/Res.metadata_3082.js</UniqueName>
       <WebResourceType>Script</WebResourceType>
     </CRMWebResource>
   </ItemGroup>

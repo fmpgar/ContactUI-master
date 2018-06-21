@@ -125,7 +125,18 @@
                     <col>
                 </colgroup>
                 <tbody>
-
+                    <tr valign="top" style="height:auto">
+                        <!--ko template: {
+            name: 'sparkle-form-field',
+            data: {
+                label: ResourceStrings.FirstName,
+                field:firstname,
+                required:0,
+                type:'text',
+                disable:false,
+                visible:true } }-->
+                        <!--/ko-->
+                    </tr>     
                     <tr valign="top" style="height:auto">
                         <!--ko template: {
                             name: 'sparkle-form-field', 
@@ -142,7 +153,7 @@
                         <!--ko template: { 
                             name: 'sparkle-form-field', 
                             data: { 
-                                label: 'Credit Limit',
+                                label: ResourceStrings.CreditLimit,
                                 field:creditlimit,
                                 required:0,
                                 type:'money',
@@ -154,7 +165,7 @@
                     </tr>
                     <tr valign="top">
                         <!--ko template: { name: 'sparkle-form-field', data: { 
-                                label: 'Preferred Contact Method',
+                                label: ResourceStrings.PreferredContactType,
                                 field:preferredcontactmethodcode,
                                 required:0,
                                 type:'optionset',

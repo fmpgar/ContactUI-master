@@ -59,10 +59,10 @@ namespace ClientUI.ViewModel
                 
             }
         }
-
+        //Obtener Guid cuenta
         public static string GetAccountId()
         {
-            string accountId = "50A82980-9574-E811-811A-5065F38BA241"; //debug
+            string accountId = string.Empty; //debug
             if (ParentPage.Ui != null)
             {
                 string guid = ParentPage.Data.Entity.GetId();
@@ -112,12 +112,13 @@ namespace ClientUI.ViewModel
         
 
         #region Methods
+        //Busqueda para cargar datos en el Grid
         public void Search()
         {
            
             Contacts.FetchXml = @"<fetch version='1.0' output-format='xml-platform' mapping='logical'  returntotalrecordcount='true' no-lock='true' distinct='false' count='{0}' paging-cookie='{1}' page='{2}'>
                                             <entity name='contact'>
-                                            <attribute name='fullname' />
+                                            <attribute name='firstname' />
                                             <attribute name='lastname' />
                                             <attribute name='preferredcontactmethodcode' />
                                             <attribute name='creditlimit' />                                            
